@@ -166,12 +166,16 @@
         <div class="career-grid">
             <div class="career-block">
                 <h3 class="subsection-title">FLYERS EVENTS</h3>
-                <div class="flyers-grid-pro">
-                    <img src="flyers/flyer1.jpg" alt="Flyer 1" loading="lazy" class="flyer-img-pro">
-                    <img src="flyers/flyer2.PNG" alt="Flyer 2" loading="lazy" class="flyer-img-pro">
-                    <img src="flyers/flyer3.JPG" alt="Flyer 3" loading="lazy" class="flyer-img-pro">
-                    <img src="flyers/flyer4.jpeg" alt="Flyer 4" loading="lazy" class="flyer-img-pro">
-                    <img src="flyers/flyer5.jpeg" alt="Flyer 5" loading="lazy" class="flyer-img-pro">
+                <div class="flyers-carousel-wrapper">
+                    <button class="carousel-btn prev-btn" aria-label="Previous">&lt;</button>
+                    <div class="flyers-grid-pro" id="flyersGrid">
+                        <img src="flyers/flyer1.jpg" alt="Flyer 1" loading="lazy" class="flyer-img-pro">
+                        <img src="flyers/flyer2.PNG" alt="Flyer 2" loading="lazy" class="flyer-img-pro">
+                        <img src="flyers/flyer3.JPG" alt="Flyer 3" loading="lazy" class="flyer-img-pro">
+                        <img src="flyers/flyer4.jpeg" alt="Flyer 4" loading="lazy" class="flyer-img-pro">
+                        <img src="flyers/flyer5.jpeg" alt="Flyer 5" loading="lazy" class="flyer-img-pro">
+                    </div>
+                    <button class="carousel-btn next-btn" aria-label="Next">&gt;</button>
                 </div>
             </div>
             <div class="career-block">
@@ -394,6 +398,19 @@
                 navbar.classList.remove('scrolled');
             }
         });
+        // Flyers Carousel Logic
+        const flyersGrid = document.getElementById('flyersGrid');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+
+        if(flyersGrid && prevBtn && nextBtn) {
+            prevBtn.addEventListener('click', () => {
+                flyersGrid.scrollBy({ left: -250, behavior: 'smooth' });
+            });
+            nextBtn.addEventListener('click', () => {
+                flyersGrid.scrollBy({ left: 250, behavior: 'smooth' });
+            });
+        }
     </script>
 </body>
 </html>
