@@ -404,6 +404,29 @@
         const nextBtn = document.querySelector('.next-btn');
 
         if(flyersGrid && prevBtn && nextBtn) {
+            const updateArrows = () => {
+                if (flyersGrid.scrollLeft <= 5) {
+                    prevBtn.style.opacity = '0';
+                    prevBtn.style.pointerEvents = 'none';
+                } else {
+                    prevBtn.style.opacity = '1';
+                    prevBtn.style.pointerEvents = 'auto';
+                }
+                
+                if (flyersGrid.scrollLeft + flyersGrid.clientWidth >= flyersGrid.scrollWidth - 5) {
+                    nextBtn.style.opacity = '0';
+                    nextBtn.style.pointerEvents = 'none';
+                } else {
+                    nextBtn.style.opacity = '1';
+                    nextBtn.style.pointerEvents = 'auto';
+                }
+            };
+            
+            flyersGrid.addEventListener('scroll', updateArrows);
+            window.addEventListener('resize', updateArrows);
+            // Delay initial check slightly to ensure layout is computed
+            setTimeout(updateArrows, 100);
+
             prevBtn.addEventListener('click', () => {
                 flyersGrid.scrollBy({ left: -250, behavior: 'smooth' });
             });
