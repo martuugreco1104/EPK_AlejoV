@@ -774,13 +774,12 @@ h1, h2, h3, h4 {
 }
 
 .booking-photo {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
+    width: 90px;
+    height: auto;
+    border-radius: 8px;
     overflow: hidden;
     margin-bottom: 25px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-    border: 2px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.1);
 }
 .booking-photo img {
     width: 100%;
@@ -946,14 +945,19 @@ h1, h2, h3, h4 {
     padding-top: 30px;
 }
 .social-links-pro a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-family: var(--font-heading);
     font-size: 0.9rem;
     color: var(--text-muted);
+    letter-spacing: 0.1em;
     text-decoration: none;
     transition: var(--transition-smooth);
 }
 .social-links-pro a:hover {
-    color: var(--text-main);
+    color: var(--accent-blue);
+    transform: translateY(-2px);
 }
 
 .footer {
