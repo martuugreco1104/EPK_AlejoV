@@ -110,6 +110,20 @@ forms.forEach(f => {
    MICRO-INTERACTIONS JS
    ============================================ */
 
+// Google Drive Video Facade
+const videoFacade = document.getElementById('videoFacade');
+if (videoFacade) {
+    videoFacade.addEventListener('click', () => {
+        videoFacade.innerHTML = `<iframe
+            src="https://drive.google.com/file/d/1xCoysym64NCTTpYQ_byzbRVYqn5uIWC2/preview"
+            title="Live Video Preview"
+            allow="autoplay; fullscreen"
+            allowfullscreen
+            style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
+        </iframe>`;
+    });
+}
+
 // 1. Scroll Progress Bar
 const scrollProgress = document.getElementById('scroll-progress');
 if (scrollProgress) {
