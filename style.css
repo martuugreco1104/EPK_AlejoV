@@ -1146,4 +1146,206 @@ h1, h2, h3, h4 {
     .system-names {
         font-size: 1.8rem;
     }
+
+    .lineup-list ul li {
+        font-size: 1.1rem;
+    }
+}
+
+/* ============================================
+   MICRO-INTERACTIONS — PRO LEVEL
+   ============================================ */
+
+/* --- 1. Custom cursor glow (desktop) --- */
+.cursor-glow {
+    position: fixed;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(3,3,161,0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.4s ease;
+    mix-blend-mode: screen;
+}
+
+/* --- 2. Nav link sweep underline --- */
+.nav-links a {
+    position: relative;
+}
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0%;
+    height: 1px;
+    background: var(--accent-blue);
+    transition: width 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* --- 3. Section title glitch reveal --- */
+.section-title {
+    position: relative;
+}
+.section-title.glitch-ready::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 2px;
+    top: 0;
+    color: var(--accent-blue);
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 0.6s cubic-bezier(0.16,1,0.3,1);
+    opacity: 0.5;
+    pointer-events: none;
+}
+.section-title.glitch-active::before {
+    clip-path: inset(0 0 0% 0);
+    animation: glitch-flash 0.5s steps(1) forwards;
+}
+@keyframes glitch-flash {
+    0%   { transform: translate(0,0);    opacity: 0.5; }
+    20%  { transform: translate(-3px,1px); opacity: 0.6; }
+    40%  { transform: translate(3px,-1px); opacity: 0.4; }
+    60%  { transform: translate(-2px,2px); opacity: 0.6; }
+    80%  { transform: translate(2px,0px);  opacity: 0.3; }
+    100% { transform: translate(0,0);    opacity: 0; }
+}
+
+/* --- 4. Download button shimmer on hover --- */
+.btn-pro-submit {
+    position: relative;
+    overflow: hidden;
+}
+.btn-pro-submit::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transform: skewX(-20deg);
+    transition: left 0s;
+}
+.btn-pro-submit:hover::after {
+    left: 160%;
+    transition: left 0.55s ease;
+}
+
+/* --- 5. Gallery image tilt on hover (3D) --- */
+.gallery-item {
+    perspective: 800px;
+}
+.gallery-item img {
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+.gallery-item:hover img {
+    box-shadow: 0 20px 60px rgba(3,3,161,0.4);
+}
+
+/* --- 6. Social icon pulse ring --- */
+.social-icon {
+    position: relative;
+}
+.social-icon::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px solid rgba(3,3,161,0);
+    transition: border-color 0.3s ease, inset 0.3s ease;
+}
+.social-icon:hover::before {
+    border-color: rgba(3,3,161,0.6);
+    inset: -10px;
+}
+
+/* --- 7. Lineup list item hover bar --- */
+.lineup-list ul li {
+    position: relative;
+    padding-left: 0;
+    transition: padding-left 0.3s cubic-bezier(0.16,1,0.3,1), color 0.3s ease;
+}
+.lineup-list ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--accent-blue);
+    transition: width 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+.lineup-list ul li:hover {
+    padding-left: 20px;
+    color: #fff;
+}
+.lineup-list ul li:hover::before {
+    width: 14px;
+}
+
+/* --- 8. YouTube facade heartbeat play button --- */
+.yt-play-btn {
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+.yt-facade:hover .yt-play-btn {
+    animation: heartbeat 0.8s ease infinite;
+}
+@keyframes heartbeat {
+    0%   { transform: scale(1); }
+    14%  { transform: scale(1.12); }
+    28%  { transform: scale(1); }
+    42%  { transform: scale(1.06); }
+    70%  { transform: scale(1); }
+}
+
+/* --- 9. Flyer image reveal shimmer on load --- */
+.flyer-img-pro {
+    animation: flyer-reveal 0.6s cubic-bezier(0.16,1,0.3,1) both;
+}
+@keyframes flyer-reveal {
+    from { opacity: 0; filter: blur(8px); transform: scale(0.97); }
+    to   { opacity: 0.85; filter: blur(0); transform: scale(1); }
+}
+
+/* --- 10. Glass card hover lift --- */
+.glass-card {
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease;
+    will-change: transform;
+}
+.glass-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 60px rgba(3,3,161,0.25);
+}
+
+/* --- 11. Scroll progress bar (top of page) --- */
+#scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent-blue), #6366f1);
+    z-index: 9998;
+    transition: width 0.1s linear;
+}
+
+/* --- 12. Spec items hover glow --- */
+.pro-spec-item {
+    transition: background 0.3s ease, transform 0.3s ease;
+    border-radius: 4px;
+    padding: 4px 8px;
+}
+.pro-spec-item:hover {
+    background: rgba(3,3,161,0.1);
+    transform: translateX(4px);
 }

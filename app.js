@@ -105,3 +105,85 @@ forms.forEach(f => {
         }
     });
 });
+
+/* ============================================
+   MICRO-INTERACTIONS JS
+   ============================================ */
+
+// 1. Scroll Progress Bar
+const scrollProgress = document.getElementById('scroll-progress');
+if (scrollProgress) {
+    window.addEventListener('scroll', () => {
+        const scrollTop = document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        scrollProgress.style.width = `${(scrollTop / scrollHeight) * 100}%`;
+    }, { passive: true });
+}
+
+// 2. Custom Cursor Glow (desktop only)
+const cursorGlow = document.getElementById('cursorGlow');
+if (cursorGlow && window.matchMedia('(pointer: fine)').matches) {
+    document.addEventListener('mousemove', (e) => {
+        cursorGlow.style.left = e.clientX + 'px';
+        cursorGlow.style.top  = e.clientY + 'px';
+    }, { passive: true });
+} else if (cursorGlow) {
+    cursorGlow.style.display = 'none';
+}
+
+// 3. Glitch effect on section titles when they enter viewport
+const titleObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const el = entry.target;
+            el.classList.add('glitch-ready');
+            setTimeout(() => el.classList.add('glitch-active'), 100);
+            setTimeout(() => el.classList.remove('glitch-active'), 700);
+            titleObserver.unobserve(el);
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.section-title[data-text]').forEach(el => titleObserver.observe(el));
+
+// 4. Gallery image 3D tilt on mouse move
+document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('mousemove', (e) => {
+        const rect = item.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width  - 0.5;
+        const y = (e.clientY - rect.top)  / rect.height - 0.5;
+        const img = item.querySelector('img');
+        if (img) img.style.transform = `rotateY(${x * 8}deg) rotateX(${-y * 8}deg) scale(1.03)`;
+    });
+    item.addEventListener('mouseleave', () => {
+        const img = item.querySelector('img');
+        if (img) img.style.transform = 'rotateY(0deg) rotateX(0deg) scale(1)';
+    });
+});
+
+// 5. Download button ripple effect on click
+document.querySelectorAll('.btn-pro-submit').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        ripple.style.cssText = `
+            position: absolute;
+            width: ${size}px; height: ${size}px;
+            left: ${e.clientX - rect.left - size/2}px;
+            top: ${e.clientY - rect.top - size/2}px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple-expand 0.5s ease-out forwards;
+            pointer-events: none;
+        `;
+        this.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 500);
+    });
+});
+
+// Inject ripple keyframe dynamically
+const rippleStyle = document.createElement('style');
+rippleStyle.textContent = `@keyframes ripple-expand { to { transform: scale(2.5); opacity: 0; } }`;
+document.head.appendChild(rippleStyle);
