@@ -688,6 +688,49 @@ h1, h2, h3, h4 {
     border-radius: 8px;
 }
 
+/* Coming Soon overlay for Soundcloud player */
+.player-wrapper.coming-soon {
+    position: relative;
+    overflow: hidden;
+}
+.overlay-coming {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    z-index: 2;
+}
+.progress-bar {
+    width: 80%;
+    height: 6px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+.progress {
+    width: 0%;
+    height: 100%;
+    background: var(--accent-blue);
+    animation: progressAnim 5s linear infinite;
+}
+@keyframes progressAnim {
+    from { width: 0%; }
+    to { width: 100%; }
+}
+.coming-text {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    letter-spacing: 0.1em;
+}
+
 /* YouTube Redirect Wrapper */
 .yt-redirect-wrapper {
     position: relative;
